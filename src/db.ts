@@ -2,7 +2,13 @@ import Database from 'better-sqlite3';
 import { app } from 'electron';
 import path from 'node:path';
 
-let db;
+export interface Pedido {
+  id?: number;
+  cliente: string;
+  data: string;
+}
+
+let db: Database.Database;
 
 export function initDatabase() {
   const dbPath = path.join(app.getPath('userData'), 'cmms.db');
@@ -19,12 +25,12 @@ export function initDatabase() {
   console.log(`📦 Banco inicializado em: ${dbPath}`);
 }
 
-export function getPedidos() {
-  return db.prepare('SELECT * FROM pedidos ORDER BY id DESC').all();
+export function getPedidos(): Pedido[] {
+  return db.prepare('SELECT * FROM pedidos ORDER BY id DESC').all() as Pedido[];
 }
 
-export function insertPedido(pedido) {
+export function insertPedido(pedido: Pedido): { id: number } {
   const stmt = db.prepare('INSERT INTO pedidos (cliente, data) VALUES (?, ?)');
   const info = stmt.run(pedido.cliente, pedido.data);
-  return { id: info.lastInsertRowid };
+  return { id: Number(info.lastInsertRowid) };
 }

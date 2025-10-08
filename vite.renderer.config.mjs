@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-// https://vitejs.dev/config
+// exporta config para a build do renderer (Vue)
 export default defineConfig({
-  plugins: [vue()]
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      '@': '/src/renderer/main_window', // ou o caminho da tua pasta vue
+    },
+  },
 });

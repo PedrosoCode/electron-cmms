@@ -1,8 +1,10 @@
+
+
 <template>
   <main class="p-4">
-    <h1>💾 Pedidos (SQLite local)</h1>
+    <h1 class="border">💾 Pedidos (SQLite + TS)</h1>
 
-    <form @submit.prevent="addPedido" class="mt-4">
+    <form @submit.prevent="addPedido">
       <input v-model="novo.cliente" placeholder="Cliente" required />
       <input v-model="novo.data" type="date" required />
       <button type="submit">Adicionar</button>
@@ -16,11 +18,13 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import type { Pedido } from './db';
+import './Global.css'
 
-const pedidos = ref([]);
-const novo = ref({ cliente: '', data: '' });
+const pedidos = ref<Pedido[]>([]);
+const novo = ref<Pedido>({ cliente: '', data: '' });
 
 async function carregar() {
   pedidos.value = await window.api.getPedidos();
@@ -28,19 +32,17 @@ async function carregar() {
 
 async function addPedido() {
   if (!novo.value.cliente || !novo.value.data) return;
-  await window.api.insertPedido({ ...novo.value });
+
+  const pedidoPlano = {
+    cliente: novo.value.cliente,
+    data: novo.value.data
+  };
+
+  await window.api.insertPedido(pedidoPlano);
   novo.value = { cliente: '', data: '' };
+
   carregar();
 }
 
 onMounted(carregar);
 </script>
-
-<style>
-body {
-  font-family: sans-serif;
-}
-input, button {
-  margin-right: 8px;
-}
-</style>

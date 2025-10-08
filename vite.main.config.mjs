@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite';
 import commonjs from '@rollup/plugin-commonjs';
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     commonjs({
       dynamicRequireTargets: [
         // Permite o uso de require dinâmico do módulo nativo
