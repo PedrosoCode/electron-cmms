@@ -14,6 +14,10 @@ export function initDatabase() {
   const dbPath = path.join(app.getPath('userData'), 'cmms.db');
   db = new Database(dbPath);
 
+  // db.exec(`
+  //   DELETE FROM pedidos
+  // `);
+
   db.exec(`
     CREATE TABLE IF NOT EXISTS pedidos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
