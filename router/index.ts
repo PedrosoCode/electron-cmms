@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AbouView from '../views/AboutView.vue'
+import CadastroParceiro from '../views/CadastroParceiroNegocioView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,14 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: AbouView,
+      component: CadastroParceiro,
+    //   component: AbouView,
+      // meta: { requiresAuth: true },
+    },
+    {
+      path: '/cadParceiro',
+      name: 'cadParceiro',
+      component: CadastroParceiro,
       // meta: { requiresAuth: true },
     }
   ],
