@@ -1,6 +1,6 @@
 
 
-<template>
+<!-- <template>
   <main class="p-4">
     <h1 class="border">💾 Pedidos (SQLite + TS)</h1>
 
@@ -16,9 +16,14 @@
       </li>
     </ul>
   </main>
+</template> -->
+
+<template>
+  <router-view />
 </template>
 
-<script setup lang="ts">
+
+<!-- <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import type { Pedido } from './db';
 import './Global.css'
@@ -45,4 +50,4 @@ async function addPedido() {
 }
 
 onMounted(carregar);
-</script>
+</script> -->
